@@ -1,8 +1,8 @@
-main: com.andurilunlogic.flyspeed.MainFlyspeed
+main: com.andurilunlogic.flyspeed.FlySpeedPlugin
 name: FlySpeed
-version: 2.1.0
-author: AndurilUnlogic
-description: A simple plugin to change your fly and walkspeed
+version: 2.2-SNAPSHOT
+authors: [AndurilUnlogic, JustBru00]
+description: A simple plugin to change your fly and walkspeed.
 
 commands:
     fly:

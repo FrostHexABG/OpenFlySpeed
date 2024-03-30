@@ -9,14 +9,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
+import static com.andurilunlogic.flyspeed.FlySpeedPlugin.prefix;
+import static com.andurilunlogic.flyspeed.FlySpeedPlugin.noPermission;
+import static com.andurilunlogic.flyspeed.FlySpeedPlugin.flightDisabled;
+import static com.andurilunlogic.flyspeed.FlySpeedPlugin.flightEnabled;
+
 public class FlyspeedCommands implements CommandExecutor {
-  Plugin plugin = (Plugin)MainFlyspeed.getPlugin(MainFlyspeed.class);
+  Plugin plugin = (Plugin)FlySpeedPlugin.getPlugin(FlySpeedPlugin.class);
   
   public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-    String prefix = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("prefix"));
-    String noPermission = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("no-permission"));
-    String flightEnabled = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("flight-enabled"));
-    String flightDisabled = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("flight-disabled"));
+   
     if (!(sender instanceof Player)) {
       if (cmd.getName().equalsIgnoreCase("flyspeed") && 
         args.length == 1 && 
@@ -422,119 +424,7 @@ public class FlyspeedCommands implements CommandExecutor {
       } 
       return true;
     } 
-    if (cmd.getName().equalsIgnoreCase("walkspeed")) {
-      if (args.length == 0) {
-        if (!p.hasPermission("flyspeed.walkspeed")) {
-          p.sendMessage(String.valueOf(prefix) + noPermission);
-          return true;
-        } 
-        if (args.length == 0) {
-          float wspeedn = p.getWalkSpeed();
-          float wspeed = wspeedn * 10.0F;
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GOLD + "Your walkspeed is: " + wspeed);
-          return true;
-        } 
-      } 
-      if (args.length == 1) {
-        if (args[0].equalsIgnoreCase("reset")) {
-          if (!p.hasPermission("flyspeed.walkspeed")) {
-            p.sendMessage(String.valueOf(prefix) + noPermission);
-            return true;
-          } 
-          p.setWalkSpeed(0.2F);
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed set to default!");
-          return true;
-        } 
-        if (args[0].equalsIgnoreCase("help")) {
-          if (!p.hasPermission("flyspeed.help")) {
-            p.sendMessage(String.valueOf(prefix) + noPermission);
-            return true;
-          } 
-          p.sendMessage("" + ChatColor.GOLD);
-          p.sendMessage(ChatColor.DARK_AQUA + "[WalkSpeed]" + ChatColor.GOLD + " Help");
-          p.sendMessage(ChatColor.GOLD + "======================================================================");
-          p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.WHITE + " /walkspeed reset--------------------Resets your walkspeed to the default.");
-          p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.WHITE + " /walkspeed reset <player>------------Resets walkspeed to default.");
-          p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.WHITE + " /walkspeed <speed>------------------Sets your own walkspeed.");
-          p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.WHITE + " /walkspeed <speed> <player>----------Sets walkspeed for someone else.");
-          p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.WHITE + " /flyspeed help----------------------Displays /flyspeed commands");
-          p.sendMessage(ChatColor.GOLD + "======================================================================");
-          return true;
-        } 
-        Player target = Bukkit.getPlayer(args[0]);
-        if (target != null) {
-          if (!p.hasPermission("flyspeed.walkspeed.others")) {
-            p.sendMessage(String.valueOf(prefix) + noPermission);
-            return true;
-          } 
-          float wspeedn = target.getWalkSpeed();
-          float wspeed = wspeedn * 10.0F;
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GOLD + "Walkspeed of " + args[0] + " is: " + wspeed);
-          return true;
-        } 
-        try {
-          float speed = Float.valueOf(args[0]).floatValue();
-          if (!p.hasPermission("flyspeed.walkspeed")) {
-            p.sendMessage(String.valueOf(prefix) + noPermission);
-            return true;
-          } 
-          if (speed < 0.0F) {
-            p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "Please choose a speed between 0 and 10!");
-            return true;
-          } 
-          if (speed > 10.0F) {
-            p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "Please choose a speed between 0 and 10!");
-            return true;
-          } 
-          float speed2 = speed / 10.0F;
-          p.setWalkSpeed(speed2);
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed set to: " + speed);
-          return true;
-        } catch (NumberFormatException e) {
-          p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "That is not a valid speed.");
-          return false;
-        } 
-      } 
-      if (args.length == 2) {
-        p.hasPermission("flyspeed.walkspeed.others");
-        Player target = Bukkit.getServer().getPlayer(args[1]);
-        if (target == null) {
-          p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "Couldn't find player!");
-          return false;
-        } 
-        if (args[0].equalsIgnoreCase("reset")) {
-          target.setWalkSpeed(0.2F);
-          target.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed set to default!");
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed of " + target.getName() + " set to default!");
-          return true;
-        } 
-        if (args[0].equalsIgnoreCase("get")) {
-          float wspeedn = target.getWalkSpeed();
-          float wspeed = wspeedn * 10.0F;
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GOLD + "Walkspeed from " + target.getName() + "is: " + wspeed);
-          return true;
-        } 
-        try {
-          float speed = Float.valueOf(args[0]).floatValue();
-          if (speed < 0.0F) {
-            p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "Please choose a speed between 0 and 10!");
-            return false;
-          } 
-          if (speed > 10.0F) {
-            p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "Please choose a speed between 0 and 10!");
-            return false;
-          } 
-          float speed2 = speed / 10.0F;
-          target.setWalkSpeed(speed2);
-          p.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed of " + target.getName() + " set to: " + speed);
-          target.sendMessage(String.valueOf(prefix) + ChatColor.GREEN + "Walkspeed set to: " + speed);
-          return true;
-        } catch (NumberFormatException e) {
-          p.sendMessage(String.valueOf(prefix) + ChatColor.RED + "That is not a valid speed.");
-          return false;
-        } 
-      } 
-    } 
+     
     return true;
   }
 }
