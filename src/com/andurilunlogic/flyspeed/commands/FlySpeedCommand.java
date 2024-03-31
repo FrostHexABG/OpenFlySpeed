@@ -33,14 +33,14 @@ public class FlySpeedCommand implements CommandExecutor {
 				return true;
 			}
 
-			Player p = (Player) sender;
-
-			if (!p.hasPermission("flyspeed.flyspeed")) {
-				p.sendMessage(prefix + noPermission);
-				return true;
-			}
+			Player p = (Player) sender;			
 
 			if (args.length == 0) {
+				if (!p.hasPermission("flyspeed.flyspeed")) {
+					p.sendMessage(prefix + noPermission);
+					return true;
+				}
+				
 				float fspeedn = p.getFlySpeed();
 				float fspeed = fspeedn * 10.0F;
 				p.sendMessage(prefix + ChatColor.GOLD + "Your flyspeed is: " + fspeed);
@@ -165,7 +165,7 @@ public class FlySpeedCommand implements CommandExecutor {
 		p.sendMessage("");
 		p.sendMessage(ChatColor.GOLD + "======================================================================");
 		p.sendMessage(ChatColor.DARK_AQUA + "[FlySpeed]" + ChatColor.GOLD + " Version: " + pdf.getVersion());
-		p.sendMessage(ChatColor.DARK_AQUA + "Author: " + ChatColor.GOLD + "AndurilUnlogic");
+		p.sendMessage(ChatColor.DARK_AQUA + "Author: " + ChatColor.GOLD + "AndurilUnlogic, JustBru00");
 		p.sendMessage(ChatColor.DARK_AQUA + "Description: " + ChatColor.GOLD + pdf.getDescription());
 		p.sendMessage(ChatColor.DARK_AQUA + "Commands: " + ChatColor.GOLD
 				+ "Use '/flyspeed help' (or '/walkspeed help') to see a list of all commands");

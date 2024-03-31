@@ -27,12 +27,12 @@ public class SpeedCommand implements CommandExecutor {
 			Player p = (Player) sender;
 
 			if (p.isFlying()) {
-				if (!p.hasPermission("flyspeed.flyspeed")) {
-					p.sendMessage(prefix + noPermission);
-					return true;
-				}
-
 				if (args.length == 0) {
+					if (!p.hasPermission("flyspeed.flyspeed")) {
+						p.sendMessage(prefix + noPermission);
+						return true;
+					}
+					
 					float fspeedn = p.getFlySpeed();
 					float fspeed = fspeedn * 10.0F;
 					p.sendMessage(prefix + ChatColor.GOLD + "Your flyspeed is: " + fspeed);
@@ -43,6 +43,7 @@ public class SpeedCommand implements CommandExecutor {
 							p.sendMessage(prefix + noPermission);
 							return true;
 						}
+						
 						p.setFlySpeed(0.1F);
 						p.sendMessage(prefix + ChatColor.GREEN + "Flyspeed set to default!");
 						return true;

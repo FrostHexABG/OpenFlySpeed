@@ -109,8 +109,10 @@ public class FlyCommand implements CommandExecutor {
 
 					p.sendMessage(prefix + flightDisabled);
 
-					if (p != target)
+					if (p != target) {
 						target.sendMessage(prefix + flightDisabled);
+					}
+					return true;
 				} else {
 					for (String s : plugin.getConfig().getConfigurationSection("default-speed").getKeys(false)) {
 						if (target.hasPermission(plugin.getConfig().getString("default-speed." + s + ".permission"))

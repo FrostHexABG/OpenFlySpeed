@@ -1,6 +1,6 @@
 main: com.andurilunlogic.flyspeed.FlySpeedPlugin
 name: FlySpeed
-version: 2.2-SNAPSHOT
+version: 2.2-RC1
 authors: [AndurilUnlogic, JustBru00]
 description: A simple plugin to change your fly and walkspeed.
 
@@ -45,4 +45,4 @@ permissions:
     default: op
   flyspeed.walkspeed.others:
     usage: Permission to change the walkspeed of others
-  default: op
+    default: op
