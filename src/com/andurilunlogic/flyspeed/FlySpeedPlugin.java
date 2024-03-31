@@ -3,6 +3,9 @@ package com.andurilunlogic.flyspeed;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.andurilunlogic.flyspeed.commands.FlyCommand;
+import com.andurilunlogic.flyspeed.commands.FlySpeedCommand;
+import com.andurilunlogic.flyspeed.commands.SpeedCommand;
 import com.andurilunlogic.flyspeed.commands.WalkSpeedCommand;
 
 @SuppressWarnings("deprecation")
@@ -20,11 +23,10 @@ public class FlySpeedPlugin extends JavaPlugin {
 		saveConfig();
 		
 		// Register command executors
-		FlyspeedCommands fspeedcom = new FlyspeedCommands();
-		getCommand("flyspeed").setExecutor(fspeedcom);
-		getCommand("walkspeed").setExecutor(new WalkSpeedCommand(this));
-		getCommand("speed").setExecutor(fspeedcom);
-		getCommand("fly").setExecutor(fspeedcom);
+		getCommand("flyspeed").setExecutor(new FlySpeedCommand(this));
+		getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
+		getCommand("speed").setExecutor(new SpeedCommand());
+		getCommand("fly").setExecutor(new FlyCommand(this));
 		
 		// Load Text Strings
 		prefix = color(getConfig().getString("prefix"));

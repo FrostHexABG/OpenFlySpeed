@@ -5,44 +5,44 @@ authors: [AndurilUnlogic, JustBru00]
 description: A simple plugin to change your fly and walkspeed.
 
 commands:
-    fly:
-        usage: /<command> [player]
-        description: Enable or disable flight
-        aliases: [f, fly]
-    flyspeed:
-        usage: /<command> 1-10 <player>
-        aliases: [fs, fspeed]
-        description: Flyspeed basis command. Arguments = reset, reload, help, <speed>
-    walkspeed:
-        usage: /<command> 1-10 <player>
-        aliases: [ws, wspeed]
-        description: Main walkspeed command
-    speed:
-        usage: /<command> 1-10
-        description: Main speed command    
+  fly:
+    usage: /<command> [player]
+    description: Enable or disable flight
+    aliases: [f, fly]
+  flyspeed:
+    usage: /<command> 1-10 <player>
+    aliases: [fs, fspeed]
+    description: Flyspeed basis command. Arguments = reset, reload, help, <speed>
+  walkspeed:
+    usage: /<command> 1-10 <player>
+    aliases: [ws, wspeed]
+    description: Main walkspeed command
+  speed:
+    usage: /<command> 1-10
+    description: Main speed command    
 
 permissions:
-    flyspeed.fly:
-        usage: Permission for the fly command
-        default: op
-    flyspeed.fly.others:
-        usage: Permission to use fly command for others
-        default: op     
-    flyspeed.flyspeed:
-        usage: Permission for flyspeed command
-        default: op
-    flyspeed.reload:
-        usage: Permission to reload flyspeed
-        default: op
-    flyspeed.flyspeed.others:
-        usage: Permission to change the flyspeed of others
-        default: op
-    flyspeed.help:
-        usage: Access to flyspeed help
-        deafult: op
-    flyspeed.walkspeed:
-        usage: Permission for walkspeed command
-        default: op
-    flyspeed.walkspeed.others:
-        usage: Permission to change the walkspeed of others
-        default: op
+  flyspeed.fly:
+    usage: Permission for the fly command
+    default: op
+  flyspeed.fly.others:
+    usage: Permission to use fly command for others
+    default: op     
+  flyspeed.flyspeed:
+    usage: Permission for flyspeed command
+    default: op
+  flyspeed.reload:
+    usage: Permission to reload flyspeed
+    default: op
+  flyspeed.flyspeed.others:
+    usage: Permission to change the flyspeed of others
+    default: op
+  flyspeed.help:
+    usage: Access to flyspeed help
+    deafult: op
+  flyspeed.walkspeed:
+    usage: Permission for walkspeed command
+    default: op
+  flyspeed.walkspeed.others:
+    usage: Permission to change the walkspeed of others
+  default: op
