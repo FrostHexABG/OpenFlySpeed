@@ -34,7 +34,6 @@ public class FlySpeedPlugin extends JavaPlugin {
 		flightEnabled = color(getConfig().getString("flight-enabled"));
 		flightDisabled = color(getConfig().getString("flight-disabled"));
 		
-		// TODO Announce plugin enabled
 	}
 
 	@Override
