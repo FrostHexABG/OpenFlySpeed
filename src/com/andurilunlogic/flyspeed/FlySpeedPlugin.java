@@ -1,5 +1,7 @@
 package com.andurilunlogic.flyspeed;
 
+import com.andurilunlogic.flyspeed.listeners.OnJoinListener;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,9 +17,11 @@ public class FlySpeedPlugin extends JavaPlugin {
 	 public static String noPermission = null;
 	 public static String flightEnabled = null;
 	 public static String flightDisabled = null;
+	 private static FlySpeedPlugin instance;
 	
 	@Override
 	public void onEnable() {
+		instance = this;
 		// Save default configuration file
 		getConfig().options().copyDefaults(true);
 		saveConfig();
@@ -27,6 +31,9 @@ public class FlySpeedPlugin extends JavaPlugin {
 		getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
 		getCommand("speed").setExecutor(new SpeedCommand());
 		getCommand("fly").setExecutor(new FlyCommand(this));
+
+		// Register Listener(s)
+		Bukkit.getPluginManager().registerEvents(new OnJoinListener(), instance);
 		
 		// Load Text Strings
 		prefix = color(getConfig().getString("prefix"));
@@ -38,11 +45,14 @@ public class FlySpeedPlugin extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		
+		instance = null;
 	}
 	
 	public static String color(String uncolored) {
 		return ChatColor.translateAlternateColorCodes('&', uncolored);
-	}	
-	
+	}
+
+	public static FlySpeedPlugin getInstance() {
+		return instance;
+	}
 }
